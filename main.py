@@ -29,3 +29,10 @@ def init_database():
                            )
                            """)
         conn.commit()
+
+def load_tasks():
+    with psycopg2.connect(**CONNECT_DB) as conn:
+        with conn.cursor() as cursor:
+            cursor.execute('SELECT id, title, priority FROM tasks ORDER BY id DESC')
+            tasks = cursor.fetchall()
+            return tasks
