@@ -36,3 +36,11 @@ def load_tasks():
             cursor.execute('SELECT id, title, priority FROM tasks ORDER BY id DESC')
             tasks = cursor.fetchall()
             return tasks
+
+def view_tasks():
+    tasks = load_tasks()
+    if not tasks:
+        print("Список задач пуст.")
+    else:
+        for task in tasks:
+            print(f"{task[0]}. {task[1]} — [{task[2]}]")
